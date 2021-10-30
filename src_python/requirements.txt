@@ -1,0 +1,10 @@
+
+cardano
+python-dateutil
+mnemonic
+
+# for looging
+loguru
+
+# used for debug
+snoop
