@@ -1,0 +1,260 @@
+_type: export
+__export_format: 4
+__export_date: 2021-10-31T17:06:21.493Z
+__export_source: insomnia.desktop.app:v2021.6.0
+resources:
+  - _id: req_0398fbfd1d43432d9a402045baa357fa
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635620859220
+    created: 1635619398295
+    url: http://localhost:8090/v2/wallets
+    name: get_wallets
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1635619398295
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_460ab982da6546adbfc09a9902e274ad
+    parentId: null
+    modified: 1635699227202
+    created: 1635619371599
+    name: cardano_wallet
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_0938f3c628f845bcac4bc8daada36cfd
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635621626180
+    created: 1635620880520
+    url: http://localhost:8090/v2/wallets/485da76a1f99414b439965c1ce80f517eeb53c0c
+    name: get_wallet_testsend
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1635620880520
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_543f2c86cbd9455996a0868ffd1811b2
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635699943343
+    created: 1635621080755
+    url: http://localhost:8090/v2/wallets/485da76a1f99414b439965c1ce80f517eeb53c0c/transactions
+    name: get_wallet_testsend_transactions
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+            "passphrase": "onetwothreefourfive",
+            "payments": [
+                {
+                    "address": "addr_test1qpl5cxkrtmr7l59lhrp0ln850c8keh04nqlgjhhgc4c2s9setvza8gj77ccxvwrup8q7ptr3szfdv69weth92ta3888qc2xxcz",
+                    "amount": {
+                        "quantity": 1000000,
+                        "unit": "lovelace"
+                    }
+                }
+            ],
+            "metadata": {
+                "1337": {
+                    "map": [
+                        {
+                            "k": {
+                                "string": "name"
+                            },
+                            "v": {
+                                "string": "hello world"
+                            }
+                        },
+                        {
+                            "k": {
+                                "string": "completed"
+                            },
+                            "v": {
+                                "int": 0
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    parameters: []
+    headers:
+      - id: pair_d8259e7bcb99454f8df4ad8ef0083ae4
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1635620165717
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_11d3ab83aaf543c8aafe6b79fd25e580
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635635435606
+    created: 1635621427125
+    url: http://localhost:8090/v2/wallets/485da76a1f99414b439965c1ce80f517eeb53c0c/addresses?state=unused
+    name: get_wallet_testsend_address
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1635620523118.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0ed8a093b3f447ba8bacb425f57eee79
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635635518468
+    created: 1635635516055
+    url: http://localhost:8090/v2/wallets/0f24d1c62312fa9917b5dfb8343b1c70721557b4
+    name: get_wallet_testrecive
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1635620701819.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dde5b859677e427eb7420664141ca8f3
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635635569024
+    created: 1635635557130
+    url: http://localhost:8090/v2/wallets/0f24d1c62312fa9917b5dfb8343b1c70721557b4/addresses?state=unused
+    name: get_wallet_testrecive_address
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1635620344417.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_650b950cfe8d4328b21f37a8f69f6d96
+    parentId: wrk_1572d55266164a61a9824a3d1516a984
+    modified: 1635619454730
+    created: 1635619450914
+    url: http://localhost:8090/v2/network/information
+    name: get_info
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1635619450914
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_1572d55266164a61a9824a3d1516a984
+    parentId: null
+    modified: 1635699812163
+    created: 1635619431364
+    name: cardano_info
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: env_c99fca7a64c293d6a304a30d3d0c3266cfdc010b
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635619371607
+    created: 1635619371607
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1635619371607
+    _type: environment
+  - _id: jar_c99fca7a64c293d6a304a30d3d0c3266cfdc010b
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635619371608
+    created: 1635619371608
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_d27326456d55434a933488cb42c59f79
+    parentId: wrk_460ab982da6546adbfc09a9902e274ad
+    modified: 1635619371602
+    created: 1635619371602
+    fileName: wallet
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_e02ff9de2506652f37dbfbafb06a2eabf2058f74
+    parentId: wrk_1572d55266164a61a9824a3d1516a984
+    modified: 1635619431376
+    created: 1635619431376
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1635619431376
+    _type: environment
+  - _id: jar_e02ff9de2506652f37dbfbafb06a2eabf2058f74
+    parentId: wrk_1572d55266164a61a9824a3d1516a984
+    modified: 1635619431378
+    created: 1635619431378
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_13b8783b3c624f3f8de17da6be347f34
+    parentId: wrk_1572d55266164a61a9824a3d1516a984
+    modified: 1635619431368
+    created: 1635619431368
+    fileName: info
+    contents: ""
+    contentType: yaml
+    _type: api_spec
