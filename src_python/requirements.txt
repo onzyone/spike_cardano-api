@@ -1,10 +1,10 @@
 
 cardano
-python-dateutil
-mnemonic
 
 # for looging
 loguru
+mnemonic
+python-dateutil
 
 # used for debug
 snoop

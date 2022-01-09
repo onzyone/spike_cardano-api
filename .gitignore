@@ -274,3 +274,7 @@ Temporary Items
 
 # other
 docker-compose.yml
+
+
+# output file
+dlc_nft.out

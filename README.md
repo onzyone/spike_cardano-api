@@ -21,6 +21,7 @@ https://developers.cardano.org/docs/integrate-cardano/listening-for-payments-cli
     - [cardano](#cardano)
     - [node](#node-1)
     - [python](#python-1)
+      - [precommit checks](#precommit-checks)
 
 <!-- /TOC -->
 
@@ -30,6 +31,7 @@ https://developers.cardano.org/docs/integrate-cardano/listening-for-payments-cli
 1. internet connection
 1. python (with pyevn)
 1. [insomnia](https://insomnia.rest/) (optional)
+1. osx (amd64)
 
 ## startup cardano node and cardano wallet
 
@@ -104,3 +106,9 @@ https://developers.cardano.org/docs/integrate-cardano/listening-for-payments-cli
 <https://snyk.io/advisor/python/cardano>
 <https://github.com/emesik/cardano-python>
 <https://cardano-python.readthedocs.io/en/latest/>
+
+#### precommit checks
+
+1. `pip install pre-commit-hooks`
+1. `pre-commit install`
+1. `pre-commit run --all-files`
