@@ -25,14 +25,15 @@ def sort_assets(cnft_in_wallet):
     bow = []
     for each in cnft_in_wallet:
         asset_id = each['unit']
-        # get only dlc assets
         if '9e9e948d' in asset_id:
-            #      print(asset_id)
+            print(asset_id)
             asset_endpoint = f'/assets/{asset_id}'
             dlc_data = get_assets(asset_endpoint)
-#      print(dlc_data)
+
+            # print(dlc_data)
             metat_data = dlc_data['onchain_metadata']
 
+            print(metat_data)
             if 'bow' in metat_data['Type'].lower():
                 bow.append(dlc_data)
 
@@ -90,6 +91,8 @@ def main():
     wallet = os.getenv('WALLET')
     asset_endpoint = f'/accounts/{wallet}/addresses/assets'
     cnft_in_wallet = get_assets(asset_endpoint)
+
+#    print(cnft_in_wallet)
 
     bow, staff, sword = sort_assets(cnft_in_wallet)
 
