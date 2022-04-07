@@ -68,7 +68,6 @@ def get_wallet_ballance(wallet_id):
 
 # TODO automate this ... right now it is manually done via this page: https://testnets.cardano.org/en/testnets/cardano/tools/faucet/
 
-
 def put_wallet_funds(wallet_id, amount, passphrase):
 
     wal = Wallet(
