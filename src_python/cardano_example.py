@@ -9,6 +9,7 @@ from cardano.wallet import WalletService
 from loguru import logger
 from mnemonic import Mnemonic
 
+PORT = 8091
 
 def create_test_wallet(wallet):
 
@@ -20,7 +21,7 @@ def create_test_wallet(wallet):
     wallet_passphrase = wallet.get('passphrase')
 
     # connect to the wallet service (in this demo running with docker compose)
-    ws = WalletService(WalletREST(port=8090))
+    ws = WalletService(WalletREST(port=PORT))
 
     # create wallets
     wal = ws.create_wallet(
@@ -34,7 +35,7 @@ def create_test_wallet(wallet):
 
 def get_wallets():
 
-    ws = WalletService(WalletREST(port=8090))
+    ws = WalletService(WalletREST(port=PORT))
     wals = ws.wallets()
 
     return wals
@@ -42,7 +43,7 @@ def get_wallets():
 
 def get_wallet(wallet_id):
 
-    ws = WalletService(WalletREST(port=8090))
+    ws = WalletService(WalletREST(port=PORT))
     try:
         wal = ws.wallet(wallet_id)
     except ValueError:
@@ -52,7 +53,7 @@ def get_wallet(wallet_id):
 
 def get_wallet_unused_address(wallet_id):
 
-    ws = WalletService(WalletREST(port=8090))
+    ws = WalletService(WalletREST(port=PORT))
     wal = ws.wallet(wallet_id)
     wal_unused = wal.first_unused_address()
     return wal_unused
@@ -60,45 +61,44 @@ def get_wallet_unused_address(wallet_id):
 
 def get_wallet_ballance(wallet_id):
 
-    ws = WalletService(WalletREST(port=8090))
+    ws = WalletService(WalletREST(port=PORT))
     wal = ws.wallet(wallet_id)
     wal_balance = wal.balance()
     return wal_balance
 
 # TODO automate this ... right now it is manually done via this page: https://testnets.cardano.org/en/testnets/cardano/tools/faucet/
 
-
-def put_wallet_funds(wallet_id, ammount, passphrase):
+def put_wallet_funds(wallet_id, amount, passphrase):
 
     wal = Wallet(
         wallet_id, backend=WalletREST(
-            port=8090,
+            port=PORT,
         ), passphrase=passphrase,
     )
     wal.sync_progress()
     logger.info(get_wallet_ballance(wallet_id))
     wal = get_wallet(wallet_id)
-    wal.transfer(ammount, passphrase=passphrase)
+    wal.transfer(int(amount), passphrase=passphrase)
 
 
 def get_transactions():
-    ws = WalletService(WalletREST(port=8090))
+    ws = WalletService(WalletREST(port=PORT))
     return ws
 
 
 @snoop
-def make_transaction(send_wal_id, ammount, passphrase, to_unused_address):
+def make_transaction(send_wal_id, amount, passphrase, to_unused_address):
 
     wal = Wallet(
         send_wal_id, backend=WalletREST(
-            port=8090,
+            port=PORT,
         ), passphrase=passphrase,
     )
     test_send_funds = get_wallet_ballance(send_wal_id)
     logger.info(
-        f'wal_id {send_wal_id}, has in {test_send_funds} funds and is going to be sending {ammount} to {to_unused_address}',
+        f'wal_id {send_wal_id}, has in {test_send_funds} funds and is going to be sending {amount} to {to_unused_address}',
     )
-    wal.transfer(to_unused_address, ammount)
+    wal.transfer(to_unused_address, int(amount))
 
 
 def testsend_to_testrecive(wallets):
@@ -115,13 +115,13 @@ def testsend_to_testrecive(wallets):
 
     wal_id_test_send = wallets[0].get('id')
     wal_name_test_send = wallets[0].get('name')
-    ammount = wallets[0].get('ammount')
+    amount = wallets[0].get('amount')
     passphrase = wallets[0].get('passphrase')
 
     logger.info(
         f'sending tada from wallet: {wal_name_test_send}, with id {wal_id_test_send}',
     )
-    make_transaction(wal_id_test_send, ammount, passphrase, test_recive_unused)
+    make_transaction(wal_id_test_send, amount, passphrase, test_recive_unused)
 
 
 def testrecive_to_testsend(wallets):
@@ -138,13 +138,13 @@ def testrecive_to_testsend(wallets):
 
     wal_id_test_send = wallets[1].get('id')
     wal_name_test_send = wallets[1].get('name')
-    ammount = wallets[1].get('ammount')
+    amount = wallets[1].get('amount')
     passphrase = wallets[1].get('passphrase')
 
     logger.info(
         f'sending tada from wallet: {wal_name_test_send}, with id {wal_id_test_send}',
     )
-    make_transaction(wal_id_test_send, ammount, passphrase, test_recive_unused)
+    make_transaction(wal_id_test_send, amount, passphrase, test_recive_unused)
 
 
 def create_mnemonic():

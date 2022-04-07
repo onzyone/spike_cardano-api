@@ -1,0 +1,54 @@
+version: "3.5"
+
+services:
+  cardano-node:
+    image: nessusio/cardano-node
+    environment:
+      CARDANO_NETWORK:
+      CARDANO_UPDATE_TOPOLOGY: true
+    volumes:
+      - node-${CARDANO_NETWORK}-db:/opt/cardano/ipc
+      - node-ipc:/opt/cardano/ipc
+    ports:
+      - 3002:3001
+    command: run
+    restart: on-failure
+    logging:
+      driver: "json-file"
+      options:
+        compress: "true"
+        max-file: "10"
+        max-size: "50m"
+
+  cardano-wallet:
+    image: inputoutput/cardano-wallet:dev-master
+    volumes:
+      - wallet-${CARDANO_NETWORK}-db:/wallet-db
+      - node-ipc:/ipc
+    ports:
+      - 8091:8090
+    entrypoint: []
+    command: bash -c "
+        ([[ $$CARDANO_NETWORK == \"mainnet\" ]] && $$CMD --mainnet) ||
+        ($$CMD --${CARDANO_NETWORK} /config/${CARDANO_NETWORK}/genesis-byron.json)
+      "
+    environment:
+      CMD: "cardano-wallet serve --node-socket /ipc/node.socket --database /wallet-db --listen-address 0.0.0.0"
+      CARDANO_NETWORK:
+    restart: on-failure
+    logging:
+      driver: "json-file"
+      options:
+        compress: "true"
+        max-file: "10"
+        max-size: "50m"
+
+volumes:
+  node-mainnet-db:
+  node-testnet-db:
+  node-alonzo-purple-db:
+  wallet-mainnet-db:
+  wallet-testnet-db:
+  wallet-alonzo-purple-db:
+  node-ipc:
+  node-config:

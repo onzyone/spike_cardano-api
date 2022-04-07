@@ -3,14 +3,14 @@
       "name": "testsend",
       "mnemonic": "fish master best hand scrub wasp december field item minute exhibit gap grief episode ecology drip rabbit marine strategy curtain price lesson fan walk",
       "passphrase": "onetwothreefourfive",
-      "ammount": 1,
+      "amount": "1",
       "id": "485da76a1f99414b439965c1ce80f517eeb53c0c"
   },
   {
       "name": "testrecive",
       "mnemonic": "denial they hero stone arm science onion maple loop dune satisfy jaguar mountain carbon ranch slush remind oven there hub crane stay apology deposit",
       "passphrase": "sixseveneightnine",
-      "ammount": 1,
+      "amount": "1",
       "id": "0f24d1c62312fa9917b5dfb8343b1c70721557b4"
   }
 ]
