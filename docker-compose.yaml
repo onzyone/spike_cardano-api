@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   cardano-node:
-    image: nessusio/cardano-node
+    image: nessusio/cardano-node:1.34.1
     environment:
       CARDANO_NETWORK:
       CARDANO_UPDATE_TOPOLOGY: true
