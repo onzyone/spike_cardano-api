@@ -275,9 +275,11 @@ Temporary Items
 # other
 docker-compose.yml
 
-
 # output file
 dlc_nft.out
 
 # nft test folder
 nft/
+
+*policy.id
+*policy.script

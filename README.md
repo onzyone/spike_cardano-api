@@ -10,13 +10,14 @@ https://developers.cardano.org/docs/integrate-cardano/listening-for-payments-cli
 
 - [spike_cardano-api](#spike_cardano-api)
   - [Required](#required)
+  - [cardano docker tools](#cardano-docker-tools)
   - [startup cardano node and cardano wallet](#startup-cardano-node-and-cardano-wallet)
   - [python](#python)
-  - [test nft](#test-nft)
+  - [test nft (manual)](#test-nft-manual)
     - [wallet and keys setup](#wallet-and-keys-setup)
     - [nft meta-data](#nft-meta-data)
+  - [test nft (automint)](#test-nft-automint)
     - [debug](#debug)
-    - [debug](#debug-1)
   - [Ref Doco](#ref-doco)
     - [cardano](#cardano)
     - [node](#node)
@@ -35,6 +36,14 @@ https://developers.cardano.org/docs/integrate-cardano/listening-for-payments-cli
 1. [insomnia](https://insomnia.rest/) (optional)
 1. osx (amd64)
    1. updated for osx (M1)
+
+## cardano docker tools
+
+1. `docker build -f cardano/Dockerfile . -t onzyone/cardano:1.34.1`
+   1. `cardano-cli`
+   1. `cardano-node`
+   1. `ipfs`
+   1. `python`
 
 ## startup cardano node and cardano wallet
 
@@ -61,14 +70,14 @@ https://developers.cardano.org/docs/integrate-cardano/listening-for-payments-cli
 
 ## python
 
-1. build `docker build -t spike_python_cardano-api -f Dockerfile_python .`
-1. run `docker run --rm --network host spike_python_cardano-api` to either make new wallets or transfer one tada between testsend and testrecive.
+1. build `docker build -t wallet_example -f Dockerfile_wallet_example .`
+1. run `docker run --rm --network host wallet_example` to either make new wallets or transfer one tada between testsend and testrecive.
    1. if you get an error "not enough ada" you wil have to add some more tada to testsend (this can only be done once every 24h)
    1. get tada, using either the insomnia file `<repo_root>/insomnia/cardano_Insomnia.yaml` or with `curl` commands to get a unused `addresses` for the testsend wallet `485da76a1f99414b439965c1ce80f517eeb53c0c`. TODO automate this
        * <https://testnets.cardano.org/en/testnets/cardano/tools/faucet/>
        * <https://github.com/input-output-hk/cardano-faucet>
 
-## test nft
+## test nft (manual)
 
 The following commands are created based on these pages:
 <https://devslug.com/how-to-mint-an-nft-on-cardano-testnet-using-the-command-line>
@@ -80,7 +89,7 @@ The following docker command explained,
   * `-v spike-cardano-api_node-ipc:/node-ipc` use the socket from the running node
   * `-v "$(PWD):/pwd"` mount the current dir into the the container
   * `-w /pwd` make the dir in the container writable
-  * `islishude/cardano-cli` cli image name
+  * `onzyone/cardano:1.34.1` tools image name
 
 ### wallet and keys setup
 
@@ -94,7 +103,7 @@ The following docker command explained,
       -v "$(PWD):/pwd" \
       -e CARDANO_NODE_SOCKET_PATH=/node-ipc/node.socket \
       -w /pwd \
-      uniqmuz/cardano-cli:1.30.1
+      onzyone/cardano:1.34.1
     ```
 1. setup a few vars:
     ```bash
@@ -116,7 +125,9 @@ The following docker command explained,
 1. create variable for payment_address `payment_address=$(cat payment.addr)`
 1. Fund the address (ensure that your node sync process is 100%)
     ```bash
-      cardano-cli query utxo \
+      cardano-cli \
+      query \
+      utxo \
       --address ${payment_address} \
       ${testnet}
     ```
@@ -241,9 +252,25 @@ The following docker command explained,
     ```bash
       cardano-cli transaction submit \
       --tx-file matx.signed \
-      --testnet-magic 1097911063
+      ${testnet}
     ```
 
+## test nft (automint)
+
+1. build `docker build -t automint_example -f Dockerfile_automint_example .`
+1. start automint_example container. (assumes that a node is running )
+    ```bash
+      docker run \
+      -it \
+      --rm \
+      --entrypoint=/bin/bash \
+      -v spike-cardano-api_node-ipc:/node-ipc \
+      -v "$(PWD):/pwd" \
+      -e CARDANO_NODE_SOCKET_PATH=/node-ipc/node.socket \
+      -w /pwd \
+      automint_example:latest
+    ```
+1. `/venv/bin/python3`
 
 ### debug
 
@@ -258,8 +285,6 @@ The following docker command explained,
     -v ${cardano_api}:/app/spike_cardano-api \
     spike_python_cardano-api
     ```
-
-### debug
 
 ## Ref Doco
 

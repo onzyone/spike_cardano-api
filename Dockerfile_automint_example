@@ -6,13 +6,12 @@ RUN apt-get update && \
 
 # Build the virtualenv as a separate step: Only re-execute this step when requirements.txt changes
 FROM build AS build-venv
-COPY src_python/requirements.txt /requirements.txt
+COPY src/automint/requirements.txt /requirements.txt
 RUN /venv/bin/pip install --disable-pip-version-check -r /requirements.txt
 
 # Copy the virtualenv into a distroless image
-FROM gcr.io/distroless/python3-debian11
+FROM onzyone/cardano:1.34.1
 COPY --from=build-venv /venv /venv
-COPY src_python/ /app
-COPY wallets.json /app
+COPY src/automint/ /app
 WORKDIR /app
 ENTRYPOINT ["/venv/bin/python3", "cardano_example.py"]

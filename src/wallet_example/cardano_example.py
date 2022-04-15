@@ -3,11 +3,12 @@
 import json
 
 import snoop
+from loguru import logger
+from mnemonic import Mnemonic
+
 from cardano.backends.walletrest import WalletREST
 from cardano.wallet import Wallet
 from cardano.wallet import WalletService
-from loguru import logger
-from mnemonic import Mnemonic
 
 PORT = 8091
 
