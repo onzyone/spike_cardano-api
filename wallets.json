@@ -33,5 +33,12 @@
     "passphrase": "sixseveneightnine",
     "amount": "1",
     "id": "00565026b78ea77c72172b0257317614a41f96b2"
-  }
+  },
+  {
+    "name": "test004",
+    "mnemoic": "gorilla pact spatial labor insane immune shuffle awake earn tribe dwarf census remain taste wage",
+    "passphrase": "onetwothreefourfive",
+    "amount": "1",
+    "id": "ed4b01e738945fe8a51ba62e7e4cf227422dfa83"
+  },
 ]
